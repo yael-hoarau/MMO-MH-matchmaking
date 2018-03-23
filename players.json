@@ -1,0 +1,403 @@
+[
+
+    {
+        "playerID": "Jougier",
+        "id": 1
+    },
+    {
+        "playerID": "Maak",
+        "id": 2
+    },
+    {
+        "playerID": "Aemict",
+        "id": 3
+    },
+    {
+        "playerID": "Quisyl",
+        "id": 4
+    },
+    {
+        "playerID": "Chaela",
+        "id": 5
+    },
+    {
+        "playerID": "Ornstrias",
+        "id": 6
+    },
+    {
+        "playerID": "Cotushu",
+        "id": 7
+    },
+    {
+        "playerID": "Tli",
+        "id": 8
+    },
+    {
+        "playerID": "Falba",
+        "id": 9
+    },
+    {
+        "playerID": "Claada",
+        "id": 10
+    },
+    {
+        "playerID": "Cythkai",
+        "id": 11
+    },
+    {
+        "playerID": "Shangron",
+        "id": 12
+    },
+    {
+        "playerID": "Coātlgra",
+        "id": 13
+    },
+    {
+        "playerID": "Salsciastsu",
+        "id": 14
+    },
+    {
+        "playerID": "Deathmee",
+        "id": 15
+    },
+    {
+        "playerID": "Gulrien",
+        "id": 16
+    },
+    {
+        "playerID": "Chris",
+        "id": 17
+    },
+    {
+        "playerID": "ZaWarudo",
+        "id": 18
+    },
+    {
+        "playerID": "JeanDuX9",
+        "id": 19
+    },
+    {
+        "playerID": "Manaczin",
+        "id": 20
+    },
+    {
+        "playerID": "Lorsyys",
+        "id": 21
+    },
+    {
+        "playerID": "Nabe",
+        "id": 22
+    },
+    {
+        "playerID": "Grimvi",
+        "id": 23
+    },
+    {
+        "playerID": "Momonga",
+        "id": 24
+    },
+    {
+        "playerID": "Touch me sama",
+        "id": 25
+    },
+    {
+        "playerID": "Nishikienrai",
+        "id": 26
+    },
+    {
+        "playerID": "Takemikazuchi",
+        "id": 27
+    },
+    {
+        "playerID": "Bukubukuchagama",
+        "id": 28
+    },
+    {
+        "playerID": "Peroroncino",
+        "id": 29
+    },
+    {
+        "playerID": "Albedo",
+        "id": 30
+    },
+    {
+        "playerID": "Shalltear Bloodfallen",
+        "id": 31
+    },
+    {
+        "playerID": "Demiurge",
+        "id": 32
+    },
+    {
+        "playerID": "Cocytus",
+        "id": 33
+    },
+    {
+        "playerID": "Aura Bella",
+        "id": 34
+    },
+    {
+        "playerID": "Mare Bello",
+        "id": 35
+    },
+    {
+        "playerID": "Victim",
+        "id": 36
+    },
+    {
+        "playerID": "Gargantua",
+        "id": 37
+    },
+    {
+        "playerID": "Pandora's Actor",
+        "id": 38
+    },
+    {
+        "playerID": "Sebas",
+        "id": 39
+    },
+    {
+        "playerID": "Narberal Gamma",
+        "id": 40
+    },
+    {
+        "playerID": "Omega",
+        "id": 41
+    },
+    {
+        "playerID": "Vox",
+        "id": 42
+    },
+    {
+        "playerID": "B",
+        "id": 43
+    },
+    {
+        "playerID": "Kazuma",
+        "id": 44
+    },
+    {
+        "playerID": "Aqua",
+        "id": 45
+    },
+    {
+        "playerID": "Lalatina",
+        "id": 46
+    },
+    {
+        "playerID": "Darkness",
+        "id": 47
+    },
+    {
+        "playerID": "Megumin",
+        "id": 48
+    },
+    {
+        "playerID": "Chomusuke",
+        "id": 49
+    },
+    {
+        "playerID": "Wizz",
+        "id": 50
+    },
+    {
+        "playerID": "Beerus",
+        "id": 51
+    },
+    {
+        "playerID": "Whis",
+        "id": 52
+    },
+    {
+        "playerID": "Jolyne",
+        "id": 53
+    },
+    {
+        "playerID": "StoneFree",
+        "id": 54
+    },
+    {
+        "playerID": "Star Platinum",
+        "id": 55
+    },
+    {
+        "playerID": "Polnareff",
+        "id": 56
+    },
+    {
+        "playerID": "Silver Chariot",
+        "id": 57
+    },
+    {
+        "playerID": "Magicien Red",
+        "id": 58
+    },
+    {
+        "playerID": "Killer Queen",
+        "id": 59
+    },
+    {
+        "playerID": "Kira",
+        "id": 60
+    },
+    {
+        "playerID": "Hand",
+        "id": 61
+    },
+    {
+        "playerID": "Crazy Diamond",
+        "id": 62
+    },
+    {
+        "playerID": "Echo",
+        "id": 63
+    },
+    {
+        "playerID": "High Priestess",
+        "id": 64
+    },
+    {
+        "playerID": "Anubis",
+        "id": 65
+    },
+    {
+        "playerID": "Dio",
+        "id": 66
+    },
+    {
+        "playerID": "Jojo",
+        "id": 67
+    },
+    {
+        "playerID": "Giorno",
+        "id": 68
+    },
+    {
+        "playerID": "Sticky Finger",
+        "id": 69
+    },
+    {
+        "playerID": "Gold Experience",
+        "id": 70
+    },
+    {
+        "playerID": "Marilyn",
+        "id": 71
+    },
+    {
+        "playerID": "Hermit Purple",
+        "id": 72
+    },
+    {
+        "playerID": "Purple Haze",
+        "id": 73
+    },
+    {
+        "playerID": "Moody Blues",
+        "id": 74
+    },
+    {
+        "playerID": "King Crimson",
+        "id": 75
+    },
+    {
+        "playerID": "Heaven's Door",
+        "id": 76
+    },
+    {
+        "playerID": "Enigma",
+        "id": 77
+    },
+    {
+        "playerID": "Harvest",
+        "id": 78
+    },
+    {
+        "playerID": "Hierophant Green",
+        "id": 79
+    },
+    {
+        "playerID": "Judgement",
+        "id": 80
+    },
+    {
+        "playerID": "Bastet",
+        "id": 81
+    },
+    {
+        "playerID": "Lovers",
+        "id": 82
+    },
+    {
+        "playerID": "Empress",
+        "id": 83
+    },
+    {
+        "playerID": "Whitesnake",
+        "id": 84
+    },
+    {
+        "playerID": "Foo Fighters",
+        "id": 85
+    },
+    {
+        "playerID": "Weather Report",
+        "id": 86
+    },
+    {
+        "playerID": "Kiss",
+        "id": 87
+    },
+    {
+        "playerID": "HighWay to Hell",
+        "id": 88
+    },
+    {
+        "playerID": "Goo Goo",
+        "id": 89
+    },
+    {
+        "playerID": "Survivor",
+        "id": 90
+    },
+    {
+        "playerID": "Manson",
+        "id": 91
+    },
+    {
+        "playerID": "Bohemian",
+        "id": 92
+    },
+    {
+        "playerID": "Diver Down",
+        "id": 93
+    },
+    {
+        "playerID": "UnderTaker",
+        "id": 94
+    },
+    {
+        "playerID": "Wamuu",
+        "id": 95
+    },
+    {
+        "playerID": "Kars",
+        "id": 96
+    },
+    {
+        "playerID": "Bad Company",
+        "id": 97
+    },
+    {
+        "playerID": "Yoshikage",
+        "id": 98
+    },
+    {
+        "playerID": "Santana",
+        "id": 99
+    },
+    {
+        "playerID": "Green",
+        "id": 100
+    }
+]
