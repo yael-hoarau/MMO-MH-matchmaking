@@ -48,9 +48,9 @@ function testOnlyValidRoles() {
     })
 }
 
-function verifNombreTeams() {
+function verifNombreTeams(players) {
     $.ajax({
-        url : 'match.php',
+        url : '../match.php',
         method : 'POST',
         data : { 'players':players}
     })
@@ -58,4 +58,36 @@ function verifNombreTeams() {
             if (teams.length === 25) return true;
             return false
         })
+}
+
+function verifNombreJoueurs() {
+    $.getJSON("../players.json", function (data) {
+        if (data.length === 100) return true;
+        return false
+    })
+}
+
+function verifJoueursDansTeams(players) {
+    $.ajax({
+        url : '../match.php',
+        method : 'POST',
+        data : { 'players':players}
+    })
+        .done(function (teams) {
+            for(let i in teams){
+                let cpt = 0;
+                for (let j in teams[i]){
+                    ++cpt;
+                }
+                if (cpt === 4) return true;
+                return false;
+            }
+        })
+}
+
+function lvlBetween1and100() {
+    $.getJSON("players.json", function (data) {
+        if (data.lvl > 100 || data.lvl < 1) return false;
+        return true;
+    })
 }
