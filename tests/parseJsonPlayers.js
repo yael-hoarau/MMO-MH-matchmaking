@@ -94,3 +94,39 @@ function verif4PlayersPerTeam() {
     });
     return true;
 }
+
+
+function testPremade(players) {
+    for (let i in players) {
+        for (let j in players[i].premade) {
+            if ($.inArray(players[i].id, players[j].premade) === -1)
+                return false;
+        }
+    }
+    return true;
+}
+
+function testGoodRolesPerTeam (teams) {
+    for (let i in teams) {
+        let arrayRoles = ['DPS', 'DPS', 'Healer', 'Tank'];
+        for (let j in teams[i]) {
+            arrayRoles.splice(arrayRoles.findIndex(teams[i][j].role));
+        }
+        if (arrayRoles.length !== 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function testGoodMoyPerTeam (teams) {
+    for (let i in teams) {
+        let arrayMoyennePerTeam = 0;
+        for (let j in teams[i]) {
+            arrayMoyennePerTeam += teams[i].lvl;
+        }
+        if ((arrayMoyennePerTeam / 4) < 40 || (arrayMoyennePerTeam / 4) > 60)
+            return false;
+    }
+    return true;
+}
