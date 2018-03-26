@@ -20,6 +20,10 @@
             }
             moyenne = calculerMoyenne(players);
             console.log(roles);
+            php_match(players);
+
+            console.log('YAY');
+
         });
     });
 })();
@@ -62,6 +66,44 @@ function calculerMoyenne(players){
     return moy;
 }
 
+function php_match(players){
+    $.ajax({
+        url : 'match.php',
+        method : 'POST',
+        data : { 'players':players}
+    })
+        .done(function (teams) {
+            for(let i = 0; i < teams.length ; i++){
+                $('#matchs')
+                    .append($('<tr />')
+                        .append($('<td />').html(teams[i][0].playerID))
+                        .append($('<td />').html(teams[i][1].playerID))
+                        .append($('<td />').html(teams[i][2].playerID))
+                        .append($('<td />').html(teams[i][3].playerID)));
+                console.log(teams[i])
+            }
+        })
+}
+
+function random_match(players){
+    let NotMatchedYet = players;
+    let Teams = [];
+
+    let secu = 0;
+    // Tant que tous les joueurs ne sont pas match
+    while(NotMatchedYet.length > 0 && secu ++ < 100) {
+        console.log('Il en reste ' + NotMatchedYet.length + ' a placer');
+
+        for( let i = 0; i < NotMatchedYet.length;  i+=4){
+            let tab = [NotMatchedYet[i], NotMatchedYet[i+1], NotMatchedYet[i+2], NotMatchedYet[i+3]];
+            Teams.push(tab);
+        }
+        NotMatchedYet = [];
+    }
+    console.log('Job done');
+    return Teams;
+}
+
 function match(players) {
     let NotMatchedYet = players;
     let InTemporaryTeam = [];
@@ -69,19 +111,41 @@ function match(players) {
     let AlreadyMatched = [];
     let Teams = [];
 
+    let secu = 0;
     // Tant que tous les joueurs ne sont pas match
-    while(AlreadyMatched.length < 100){
+    while(AlreadyMatched.length < 100 && secu ++ < 100){
+        console.log('Il en reste ' + NotMatchedYet.length + ' a placer' );
 
         //on parcours tous les joueurs non matchés
         for( let i = NotMatchedYet.length; i >= 0 ; i--){
+            //console.log($.inArray(NotMatchedYet[i - 1], InTemporaryTeam ));
             // On esssais de les matcher
             // On les place dans des teams temporaires jusqu'à un maximum de 4
+            if(NotMatchedYet[i - 1] !== undefined && $.inArray(NotMatchedYet[i - 1], InTemporaryTeam ) == -1){
+                console.log('A');
+                let placed = false;
+                for( let j = 0; j < TemporaryTeams.length ; j++){
+                    if(TemporaryTeams[j].length  == 2){
+                        TemporaryTeams[j].push(NotMatchedYet[i - 1]);
+                        TemporaryTeams[j].push(NotMatchedYet[i]);
+                        InTemporaryTeam.push(NotMatchedYet[i - 1]);
+                        InTemporaryTeam.push(NotMatchedYet[i]);
+                        placed = true;
+                    }
+                }
+                if(!placed){
+                    TemporaryTeams.push([NotMatchedYet[i - 1], NotMatchedYet[i] ]);
+                    InTemporaryTeam.push(NotMatchedYet[i - 1]);
+                    InTemporaryTeam.push(NotMatchedYet[i]);
+                }
+            }
         }
 
         // On parcours les teams temporaires
-        for( let i = TemporaryTeams.length; i >= 0 ; i--){
+        for( let i = TemporaryTeams.length; i > 0 ; i--){
             // Si la team est full
-            if(TemporaryTeams[i].length == 4){
+            console.log(i);
+            if(TemporaryTeams[i -1].length == 4){
                 //On la met dans les teams finales
                 Teams.push(TemporaryTeams[i]);
 
