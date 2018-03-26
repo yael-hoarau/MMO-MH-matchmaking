@@ -1,5 +1,5 @@
 function testAddTank(number) {
-    let roles = {"Tank": number, "DPS" : 56, "Heal" : 5};
+    let roles = {"Tank": number, "DPS" : 56, "Healer" : 5};
     let rolesfn = fillUpRoles(roles, "Tank");
     if (rolesfn.Tank === number+1){
         return true;
@@ -8,7 +8,7 @@ function testAddTank(number) {
 }
 
 function testAddDPS(number) {
-    let roles = {"Tank": 5, "DPS" : number, "Heal" : 5};
+    let roles = {"Tank": 5, "DPS" : number, "Healer" : 5};
     let rolesfn = fillUpRoles(roles, "DPS");
     if (rolesfn.DPS === number+1){
         return true;
@@ -17,8 +17,8 @@ function testAddDPS(number) {
 }
 
 function testAddHeal(number) {
-    let roles = {"Tank": 5, "DPS" : 56, "Heal" : number};
-    let rolesfn = fillUpRoles(roles, "Heal");
+    let roles = {"Tank": 5, "DPS" : 56, "Healer" : number};
+    let rolesfn = fillUpRoles(roles, "Healer");
     if (rolesfn.Heal === number+1){
         return true;
     }
@@ -43,7 +43,19 @@ function testMoyenne() {
 
 function testOnlyValidRoles() {
     $.getJSON("players.json", function (data) {
-        if (data.role === "Tank" || data.role === "DPS" || data.role === "Heal") return true;
+        if (data.role === "Tank" || data.role === "DPS" || data.role === "Healer") return true;
         return false;
     })
+}
+
+function verifNombreTeams() {
+    $.ajax({
+        url : 'match.php',
+        method : 'POST',
+        data : { 'players':players}
+    })
+        .done(function (teams) {
+            if (teams.length === 25) return true;
+            return false
+        })
 }
