@@ -1,5 +1,5 @@
 function testAddTank(number) {
-    let roles = {"Tank": number, "DPS" : 56, "Heal" : 5};
+    let roles = {"Tank": number, "DPS" : 56, "Healer" : 5};
     let rolesfn = fillUpRoles(roles, "Tank");
     if (rolesfn.Tank === number+1){
         return true;
@@ -8,7 +8,7 @@ function testAddTank(number) {
 }
 
 function testAddDPS(number) {
-    let roles = {"Tank": 5, "DPS" : number, "Heal" : 5};
+    let roles = {"Tank": 5, "DPS" : number, "Healer" : 5};
     let rolesfn = fillUpRoles(roles, "DPS");
     if (rolesfn.DPS === number+1){
         return true;
@@ -17,8 +17,8 @@ function testAddDPS(number) {
 }
 
 function testAddHeal(number) {
-    let roles = {"Tank": 5, "DPS" : 56, "Heal" : number};
-    let rolesfn = fillUpRoles(roles, "Heal");
+    let roles = {"Tank": 5, "DPS" : 56, "Healer" : number};
+    let rolesfn = fillUpRoles(roles, "Healer");
     if (rolesfn.Heal === number+1){
         return true;
     }
@@ -43,7 +43,90 @@ function testMoyenne() {
 
 function testOnlyValidRoles() {
     $.getJSON("players.json", function (data) {
-        if (data.role === "Tank" || data.role === "DPS" || data.role === "Heal") return true;
+        if (data.role === "Tank" || data.role === "DPS" || data.role === "Healer") return true;
         return false;
     })
+}
+
+function verifNombreTeams() {
+    let cpt = 0;
+    $('#matchs').find('tr').each(function () {
+        ++cpt;
+    });
+    if (cpt !== 25) return false;
+    return true;
+
+}
+
+function verifNombreJoueurs() {
+    $.getJSON("../players.json", function (data) {
+        if (data.length === 100) return true;
+        return false
+    })
+}
+
+function notSamePlayers() {
+    let tab = [];
+    $('#matchs').find('td').each(function () {
+        if ($.inArray( $(this).text(), tab ) === -1) {
+            tab.push($(this).text());
+        } else{
+            return false;
+        }
+    });
+}
+
+function lvlBetween1and100() {
+    $.getJSON("players.json", function (data) {
+        if (data.lvl > 100 || data.lvl < 1) return false;
+        return true;
+    })
+}
+
+function verif4PlayersPerTeam() {
+    let cpt;
+    $('#matchs').find('tr').each(function () {
+        cpt = 0;
+        $(this).find('td').each(function () {
+            ++cpt;
+        });
+        if (cpt !== 4) return false;
+    });
+    return true;
+}
+
+
+function testPremade(players) {
+    for (let i in players) {
+        for (let j in players[i].premade) {
+            if ($.inArray(players[i].id, players[j].premade) === -1)
+                return false;
+        }
+    }
+    return true;
+}
+
+function testGoodRolesPerTeam (teams) {
+    for (let i in teams) {
+        let arrayRoles = ['DPS', 'DPS', 'Healer', 'Tank'];
+        for (let j in teams[i]) {
+            arrayRoles.splice(arrayRoles.findIndex(teams[i][j].role));
+        }
+        if (arrayRoles.length !== 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function testGoodMoyPerTeam (teams) {
+    for (let i in teams) {
+        let arrayMoyennePerTeam = 0;
+        for (let j in teams[i]) {
+            arrayMoyennePerTeam += teams[i].lvl;
+        }
+        if ((arrayMoyennePerTeam / 4) < 40 || (arrayMoyennePerTeam / 4) > 60)
+            return false;
+    }
+    return true;
 }
