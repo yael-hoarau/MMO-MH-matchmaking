@@ -5,24 +5,29 @@
         let moyenne;
         let players = [];
         let roles = {"Tank" : 0, "Heal" : 0, "DPS": 0};
-        $.getJSON('data.json', function(data) {
+        $.getJSON('players1.json', function(data) {
             for(let i = 0; i < data.length ; i++){
                 players.push({id : data[i].id, playerID : data[i].playerID,
-                    lvl : data[i].lvl, role : data[i].role });
+                    lvl : data[i].HR, role : data[i].role, premade : data[i].premade  });
                 roles = fillUpRoles(roles, data[i].role);
+
+                let premade = '';
+                for( let j = 0; j < data[i].premade.length ; j++ ){
+                    premade += data[i].premade[j] + " ";
+                }
                 $('#player_list')
                     .append($('<tr />')
                         .append($('<td />').attr("id", "id").html(data[i].id))
                         .append($('<td />').attr("id", "playerID").html(data[i].playerID))
-                        .append($('<td />').attr("id", "lvl").html(data[i].lvl))
+                        .append($('<td />').attr("id", "lvl").html(data[i].HR))
                         .append($('<td />').attr("id", "role").html(data[i].role))
-                        .append($('<td />').attr("id", "premade").html(data[i].premade)));
+                        .append($('<td />').attr("id", "premade").html(premade)));
             }
             moyenne = calculerMoyenne(players);
             console.log(roles);
-            php_match(players);
+            php_match(players, moyenne);
+            //stats_match(players, moyenne);
 
-            console.log('YAY');
 
         });
     });
@@ -33,7 +38,7 @@ function fillUpRoles(roles, role) {
         case "Tank" :
             roles.Tank++;
             break;
-        case "Heal" :
+        case "Healer" :
             roles.Heal++;
             break;
         case "DPS" :
@@ -66,11 +71,11 @@ function calculerMoyenne(players){
     return moy;
 }
 
-function php_match(players){
+function php_match(players, moyenne){
     $.ajax({
         url : 'match.php',
         method : 'POST',
-        data : { 'players':players}
+        data: {players: players, moyenne: moyenne}
     })
         .done(function (teams) {
             for(let i = 0; i < teams.length ; i++){
@@ -80,29 +85,47 @@ function php_match(players){
                         .append($('<td />').html(teams[i][1].playerID))
                         .append($('<td />').html(teams[i][2].playerID))
                         .append($('<td />').html(teams[i][3].playerID)));
-                console.log(teams[i])
             }
         })
 }
 
-function random_match(players){
-    let NotMatchedYet = players;
-    let Teams = [];
+function stats_match(players, moyenne){
+    let nbfail = 0;
+    let min = 10;
+    let max = 2;
+    for(let j = 0;j < 5000; j++){
+        $.ajax({
+            url : 'match.php',
+            method : 'POST',
+            data: {players: players, moyenne: moyenne}
+        })
+            .done(function (teams) {
+                for(let i = 0; i < teams.length ; i++){
+                    let moyteam = parseFloat( parseInt(teams[i][0].lvl) + parseInt(teams[i][1].lvl)
+                        + parseInt(teams[i][2].lvl) + parseInt(teams[i][3].lvl)) / 4.0;
+                    //console.log(moyteam);
+                    if(moyteam > moyenne + 10 || moyteam < moyenne - 10){
+                        //console.log(teams[i])
+                        ++nbfail;
+                    }
+                }
 
-    let secu = 0;
-    // Tant que tous les joueurs ne sont pas match
-    while(NotMatchedYet.length > 0 && secu ++ < 100) {
-        console.log('Il en reste ' + NotMatchedYet.length + ' a placer');
-
-        for( let i = 0; i < NotMatchedYet.length;  i+=4){
-            let tab = [NotMatchedYet[i], NotMatchedYet[i+1], NotMatchedYet[i+2], NotMatchedYet[i+3]];
-            Teams.push(tab);
-        }
-        NotMatchedYet = [];
+                if(nbfail > max){
+                    console.log(nbfail);
+                    max = nbfail
+                }
+                if(nbfail < min){
+                    console.log(nbfail);
+                    min = nbfail
+                }
+                nbfail = 0;
+            })
     }
-    console.log('Job done');
-    return Teams;
+
+
 }
+
+
 
 function match(players) {
     let NotMatchedYet = players;
