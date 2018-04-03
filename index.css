@@ -1,0 +1,41 @@
+#player_list, #matchs {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+    border-spacing: 0 1em;
+    margin-left: auto;
+    margin-right: auto;
+    table-layout: fixed;
+}
+
+#matchs{
+    border-collapse: separate;
+    width: 100%;
+}
+
+#button_matchs, #button_player{
+    margin-left: auto;
+    margin-right: auto;
+    width: 150px;
+}
+
+#player_list td, #player_list th, #matchs td, #matchs th {
+    border: 3px solid white;
+    padding: 8px;
+}
+
+#player_list tr:nth-child(even){background-color: #f2f2f2;}
+#matchs tr:nth-child(even){background-color: #f2f2f2;}
+
+
+#player_list tr:hover {background-color: #ddd;}
+#matchs tr:hover {background-color: #ddd;}
+
+#player_list td, #matchs td {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    /*background-color: #4CAF50;*/
+    color: black;
+
+}

@@ -18,6 +18,7 @@ $tempTeams = array();
 $teams = array();
 
 $secu = 0;
+$diff = 10;
 
 
 foreach ($notMatchedYet as $i => $row){
@@ -59,7 +60,9 @@ foreach($tempTeams as $i => $row){
     else {
         $roles = array("Tank", "Healer", "DPS", "DPS");
         $doubles = array();
+        $lvls = 0;
         foreach ($tempTeams[$i] as $j => $r){
+            $lvls += (int) $tempTeams[$i][$j]['lvl'];
             array_splice($notMatchedYet, array_search($tempTeams[$i][$j], $notMatchedYet), 1);
             $inTeams[] = $tempTeams[$i][$j];
             if(!isset($tempTeams[$i][$j]["role"]))continue;
@@ -68,14 +71,23 @@ foreach($tempTeams as $i => $row){
             else
                 $doubles[] = $tempTeams[$i][$j]["role"];
         }
+        $moyteam = $lvls / count($tempTeams[$i]);
+        $secur = 0;
         foreach($roles as $k){
             if(count($tempTeams[$i]) == 4 || in_array($k, $doubles))
                 break;
 
             do{
-                if($secu++ >= 100) break;
                 $rand = mt_rand(0, count($notMatchedYet) -1);
-            }while($notMatchedYet[$rand]["role"] != $k || isset($notMatchedYet[$rand]["premade"])  );
+                if($secur++ >= 1000){
+                    $secur = 0;
+                    break;
+                }
+
+                $newmoy = ($moyteam + (int) $notMatchedYet[$rand]['lvl']) / 2.0;
+            }while($notMatchedYet[$rand]["role"] != $k || isset($notMatchedYet[$rand]["premade"])
+                    || $moyenne - $diff > $newmoy || $moyenne + $diff < $newmoy);
+
 
             $tempTeams[$i][] = $notMatchedYet[$rand];
             $inTeams[] = $notMatchedYet[$rand];
@@ -169,15 +181,15 @@ while(count($notMatchedYet) > 0){
 
         foreach($roles as $k){
             $sec = 0;
-            $diff = 10;
             //echo $i . "\r\n";
             if($k == 'DPS'){
                 do{
+                    $randDPS = mt_rand(0, count($notMatchedYetDps) -1);
                     if($sec++ >= 1000){
                         $sec = 0;
                         break;
                     }
-                    $randDPS = mt_rand(0, count($notMatchedYetDps) -1);
+
                     $newmoy = ($moyteam + (int) $notMatchedYetDps[$randDPS]['lvl']) / 2.0;
                 }while( $moyenne - $diff > $newmoy || $moyenne + $diff < $newmoy );
 
@@ -189,11 +201,12 @@ while(count($notMatchedYet) > 0){
             }
             if($k == 'Tank'){
                 do{
+                    $randTank = mt_rand(0, count($notMatchedYetTank) -1);
                     if($sec++ >= 1000){
                         $sec = 0;
                         break;
                     }
-                    $randTank = mt_rand(0, count($notMatchedYetTank) -1);
+
                     $newmoy = ($moyteam + (int) $notMatchedYetTank[$randTank]['lvl']) / 2.0;
                 }while( $moyenne - $diff > $newmoy || $moyenne + $diff < $newmoy );
                 $rand = array_search($notMatchedYetTank[$randTank], $notMatchedYet );
@@ -204,11 +217,12 @@ while(count($notMatchedYet) > 0){
             }
             if($k == 'Healer'){
                 do{
+                    $randHeal = mt_rand(0, count($notMatchedYetHeal) -1);
                     if($sec++ >= 1000){
                         $sec = 0;
                         break;
                     }
-                    $randHeal = mt_rand(0, count($notMatchedYetHeal) -1);
+
                     $newmoy = ($moyteam + (int) $notMatchedYetHeal[$randHeal]['lvl']) / 2.0;
                 }while( $moyenne - $diff > $newmoy || $moyenne + $diff < $newmoy );
                 $rand = array_search($notMatchedYetHeal[$randHeal], $notMatchedYet );
@@ -236,7 +250,24 @@ while(count($notMatchedYet) > 0){
     }
 }
 
+$teamss = array();
+$count = count($teams);
+
+for($i = 0; $i < $count; $i++){
+    $rand = mt_rand(0, count($teams) -1);
+    $temptab = array();
+    for($j = 0; $j < 4; $j++){
+        $randd = mt_rand(0, count($teams[$rand]) -1);
+        $temptab[] = $teams[$rand][$randd];
+        array_splice($teams[$rand] , $randd, 1);
+    }
+    $teamss[] = $temptab;
+    array_splice($teams , $rand, 1);
+
+
+}
+
 header('Cache-Control: no-cache, must-revalidate');
 header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 header('Content-type: application/json');
-echo json_encode($teams);
+echo json_encode($teamss);

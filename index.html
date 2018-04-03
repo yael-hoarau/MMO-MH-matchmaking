@@ -3,12 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Monster Hunter MatchMaking</title>
+    <link rel="stylesheet" href="index.css" />
     <script src="modernizr-3.5.0.min.js"></script>
     <script src="jquery-3.2.1.min.js"></script>
     <script src="MatchMaking.js"></script>
 </head>
 <body>
-    <table id="player_list" style="float: left"></table>
-    <table id="matchs" style="float: right"></table>
+    <div style="text-align: center; margin-bottom: 10px">
+        <button id="button_matchs" style="text-align: center" onclick="afficherMatchs()">Afficher matchs</button>
+        <button id="button_player" style="text-align: center; display: none;" onclick="afficherJoueurs()">Afficher joueurs</button>
+        <button id="button_match" style="text-align: center; display: none;" >Générer nouveaux matchs</button>
+        <h2 id="indic">Liste des joueurs</h2>
+    </div>
+
+
+    <table id="player_list" ></table>
+    <table id="matchs" style=" display: none"></table>
 </body>
 </html>
